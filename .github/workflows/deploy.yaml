@@ -25,5 +25,13 @@ jobs:
 
       # - name: Deploy to Server
       #   run:
-      #     echo "Deploying..."
-      #     npm run build
+      #     #设置SSH密钥
+      #     mkdir -p ~/.ssh
+      #     echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+      #     chmod 600 ~/.ssh/id_rsa
+
+      #     #添加服务器到known_hosts 避免首次连接提示
+      #     ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+
+      #     #使用 scp 上传 dist 目录到远程服务器
+      #     scp -r dist/* ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/www/xXxx
